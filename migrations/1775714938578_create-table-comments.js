@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 
-exports.up = (pgm) => {
+export const up = (pgm) => {
   pgm.createTable('comments', {
     id: { type: 'VARCHAR(50)', primaryKey: true },
     thread_id: { type: 'VARCHAR(50)', notNull: true },
@@ -22,6 +22,6 @@ exports.up = (pgm) => {
   );
 };
 
-exports.down = (pgm) => {
+export const down = (pgm) => {
   pgm.dropTable('comments');
 };
