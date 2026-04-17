@@ -59,3 +59,6 @@ jobs:
           PGPASSWORD: "developer"
           PGDATABASE: forumapi_test
           PGPORT: 5432
+          ACCESS_TOKEN_KEY: secret_access_token_ci
+          REFRESH_TOKEN_KEY: secret_refresh_token_ci
+          ACCESS_TOKEN_AGE: 3000
