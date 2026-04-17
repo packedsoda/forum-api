@@ -7,12 +7,23 @@ import threads from '../../Interfaces/http/api/threads/index.js';
 import comments from '../../Interfaces/http/api/comments/index.js';
 import replies from '../../Interfaces/http/api/replies/index.js';
 import likes from '../../Interfaces/http/api/likes/index.js';
+import rateLimit from 'express-rate-limit';
 
 const createServer = async (container) => {
   const app = express();
 
   // Middleware for parsing JSON
   app.use(express.json());
+
+  // Rate Limiter
+  const limiter = rateLimit({
+    windowMs: 1 * 60 * 1000,
+    max: 90,
+    message: {
+      status: 'fail',
+      message: 'Terlalu banyak permintaan, silakan coba lagi nanti.',
+    },
+  });
 
   // Register routes
   app.use('/users', users(container));
@@ -21,6 +32,7 @@ const createServer = async (container) => {
   app.use('/threads', comments(container));
   app.use('/threads', replies(container));
   app.use('/threads', likes(container));
+  app.use('/threads', limiter);
 
   // Global error handler
   // eslint-disable-next-line no-unused-vars
