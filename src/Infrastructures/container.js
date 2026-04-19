@@ -93,7 +93,7 @@ container.register([
     key: LikeRepository.name,
     Class: LikeRepositoryPostgres,
     parameter: {
-      dependencies: [{ internal: pool.name }, { internal: nanoid.name }],
+      dependencies: [{ concrete: pool }, { concrete: nanoid }],
     },
   },
   {
